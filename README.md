@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Prisma Commands
+
+`npx prisma migrate reset ` This command: Drops the database/schema¹ if possible, or performs a soft reset if the environment does not allow deleting databases/schemas
+
+`npx prisma generate` The generate command is most often used to generate Prisma Client with the prisma-client-js generator. This does three things: Searches the current directory and parent directories to find the applicable npm project. It will create a package.json file in the current directory if it cannot find one. It will install the prisma-client-js generator if it is not already installed. It will generate Prisma Client.
+
+`npx prisma db push` This command is used to push the current schema to the database.
+
+`npx prisma studio` This command is used to open the Prisma Studio.
+
+`npx prisma migrate dev --name init` This command is used to create a new migration.
+
+`npx prisma migrate reset` This command is used to reset the database
