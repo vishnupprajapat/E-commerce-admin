@@ -17,6 +17,19 @@ model Store {
   id  String @id @default(uuid())
   name String
   userId String
+  billBoards Billboard[] @relation("StoreToBillboard")
   createdAt  DateTime @default(now())
   upddateAt  DateTime @updatedAt
+}
+
+model Billboard{
+  id String @id @default(uuid())
+  storId String
+  store Store @relation("StoreToBillboard",fields: [storId],references: [id])
+  label String
+  imageUrl  String
+  createdAt  DateTime @default(now())
+  upddateAt  DateTime @updatedAt
+  
+  @@index([storId])
 }

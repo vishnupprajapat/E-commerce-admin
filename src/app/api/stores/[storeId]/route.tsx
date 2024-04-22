@@ -16,7 +16,6 @@ export async function PATCH(
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
     }
-    console.log("store-id == ", params);
     if (!params.storeId) {
       return new NextResponse("storeId is required", { status: 400 });
     }
