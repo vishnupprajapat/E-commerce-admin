@@ -7,12 +7,12 @@ const BillboardsPage = async ({
   params,
 }: {
   params: {
-    storId: string;
+    storeId: string;
   };
 }) => {
   const billboards = await prismadb.billboard.findMany({
     where: {
-      storId: params.storId,
+      storId: params.storeId,
     },
     orderBy: {
       createdAt: "desc",
