@@ -21,6 +21,7 @@ model Store {
   categories Category[] @relation("StoreToCategory")
   sizes Size[] @relation("StoreToSize")
   colors Color[] @relation("StoreToColor")
+  products Product[] @relation("StoreToProduct")
   createdAt  DateTime @default(now())
   upddateAt  DateTime @updatedAt
 }
@@ -39,6 +40,7 @@ model Billboard{
 }
 model Category {
   id String @id @default(uuid())
+  products Product[] @relation("CategoryToProduct")
   storId String
   store Store @relation("StoreToCategory",fields: [storId],references: [id])
   billboardId String
@@ -54,6 +56,7 @@ model Size {
   id String @id @default(uuid())
   storId String
   store Store @relation("StoreToSize",fields: [storId],references: [id])
+  products Product[]
   name String
   value String
   createdAt  DateTime @default(now())
@@ -65,10 +68,45 @@ model Color {
   id String @id @default(uuid())
   storId String
   store Store @relation("StoreToColor",fields: [storId],references: [id])
+  products Product[]
   name String
   value String
   createdAt  DateTime @default(now())
   upddateAt  DateTime @updatedAt
 
   @@index([storId])
+}
+model Product {
+  id String @id @default(uuid())
+  storId String
+  store Store @relation("StoreToProduct",fields: [storId],references: [id])
+  categoryId String
+  category Category @relation("CategoryToProduct",fields: [categoryId],references: [id])
+  name String
+  price Decimal
+  isfeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+  sizeId String
+  size Size @relation(fields: [sizeId],references: [id])
+  colorId String
+  color Color @relation(fields: [colorId],references: [id])
+  images Image[]
+  createdAt  DateTime @default(now())
+  upddateAt  DateTime @updatedAt
+
+  @@index([storId])
+  @@index([categoryId])
+  @@index([sizeId])
+  @@index([colorId])
+}
+
+model Image{
+  id String @id @default(uuid())
+  productId String
+  product Product @relation(fields: [productId],references: [id],onDelete: Cascade)
+  url String
+  createdAt  DateTime @default(now())
+  upddateAt  DateTime @updatedAt
+
+   @@index([productId])
 }
